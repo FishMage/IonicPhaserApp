@@ -1,0 +1,67 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="en">-->
+<!--<head>-->
+  <!--<meta charset="UTF-8">-->
+  <!--<title>Quiz</title>-->
+  <!--<style type="text/css">-->
+    <!--.flip {-->
+      <!-- -moz-transform: scale(-1, -1);-->
+      <!-- -webkit-transform: scale(-1, -1);-->
+      <!-- -o-transform: scale(-1, -1);-->
+      <!-- -ms-transform: scale(-1, -1);-->
+      <!--transform: scale(-1, -1);-->
+    <!--}-->
+    <!--/*Remove these, demo only.*/-->
+    <!--button {-->
+      <!--padding: 20px;-->
+      <!--margin: 10px;-->
+    <!--}-->
+    <!--body {-->
+        <!--width: 100%; height: 100%; margin: 0px; padding: 0px; -->
+    <!--}-->
+    <!--.quizContainer {-->
+      <!--position: relative;-->
+      <!--width: 100%; -->
+      <!--height: 100%;-->
+    <!--}-->
+    <!--.score {-->
+      <!--color: red; text-align: center; font-size: 4em;-->
+    <!--}-->
+  <!--</style>-->
+<!--</head>-->
+<!--&lt;!&ndash;<link href="//code.ionicframework.com/nightly/css/ionic.css" rel="stylesheet">&ndash;&gt;-->
+<!--&lt;!&ndash;<script src="//code.ionicframework.com/nightly/js/ionic.bundle.js"></script>&ndash;&gt;-->
+<!--<body>-->
+
+<ion-view view-title="Welcome to My Quiz" ng-init="getRandomQuestion();">
+  <!--<ion-nav-bar class="bar-positive">-->
+  <ion-header-bar class="bar-stable">
+    <h1 class="title">Math Quiz</h1> <!-- The title bar has a title of "GuestBook" and uses an "h1" HTML tag -->
+  </ion-header-bar>
+  <br><br>
+  <ion-nav-view></ion-nav-view>
+  <ion-content class="padding">
+  </ion-content>
+
+  <div class="quizContainer">
+  <div class="flip">
+    <h1 class="score">Player One: {{playerScores[0]}}</h1>
+    <h2 style="text-align: center;">{{question.question}}</h2>
+    <div>
+      <button ng-repeat="answer in question.answers track by $index" ng-click="checkResult(0, answer)">{{answer}}</button>
+    </div>
+  </div>
+
+  <hr style="position: fixed; top: 50%; left: 0; width: 100%;">
+
+  <div style="position: fixed; bottom: 0; width: 100%;">
+    <h1 class="score">Player Two: {{playerScores[1]}}</h1>
+    <h2 style="text-align: center;">{{question.question}}</h2>
+    <div>
+      <button ng-repeat="answer in question.answers track by $index" ng-click="checkResult(1, answer)">{{answer}}</button>
+    </div>
+  </div>
+  </div>
+</ion-view>
+<!--</body>-->
+<!--</html>-->

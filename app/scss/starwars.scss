@@ -1,0 +1,14 @@
+.starwarsView{
+	ion-content{
+		background-image: url('../img/starwarsbackground.png');
+	}
+	
+	.starwars3D{
+		perspective: 300px;
+        
+        canvas{
+            transform: rotateX(25deg);
+            transform-origin: 50% 100%;
+        }
+	}
+}

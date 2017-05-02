@@ -1,0 +1,28 @@
+.homeView{
+	background-color: black;
+	.center-content {
+		background: linear-gradient(260deg, #313131, #1c1c1c, #d61c1c);
+		background-size: 800% 800%;
+		animation: background 26s ease infinite;
+	}
+	
+	.animatedDelay{
+		animation-delay: 1s;
+	}
+	
+	h1{
+		font-size: 40px;
+    font-family: 'Sigmar One', cursive;
+		color: #444;
+	}
+	
+	.card{
+		margin-bottom: 10px;
+	}
+}
+
+@keyframes background { 
+	0%{background-position:0% 88%}
+	50%{background-position:100% 13%}
+	100%{background-position:0% 88%}
+}

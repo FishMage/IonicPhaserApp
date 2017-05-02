@@ -1,0 +1,46 @@
+{
+  "name": "ionic",
+  "version": "1.3.0-nightly-3116",
+  "codename": "delhi",
+  "homepage": "https://github.com/driftyco/ionic",
+  "authors": [
+    "Max Lynch <max@drifty.com>",
+    "Adam Bradley <adam@drifty.com>",
+    "Ben Sperry <ben@drifty.com>"
+  ],
+  "description": "Advanced HTML5 hybrid mobile app development framework.",
+  "main": [
+    "css/ionic.css",
+    "fonts/*",
+    "js/ionic.js",
+    "js/ionic-angular.js"
+  ],
+  "keywords": [
+    "mobile",
+    "html5",
+    "ionic",
+    "cordova",
+    "phonegap",
+    "trigger",
+    "triggerio",
+    "angularjs",
+    "angular"
+  ],
+  "license": "MIT",
+  "private": false,
+  "dependencies": {
+    "angular": "1.5.3",
+    "angular-animate": "1.5.3",
+    "angular-sanitize": "1.5.3",
+    "angular-ui-router": "0.2.13"
+  },
+  "_release": "1.3.0-nightly-3116",
+  "_resolution": {
+    "type": "version",
+    "tag": "v1.3.0-nightly-3116",
+    "commit": "4883f234e066704a7878c27254eafd25aee3f22b"
+  },
+  "_source": "git://github.com/driftyco/ionic-bower.git",
+  "_target": "1.3.0-nightly-3116",
+  "_originalSource": "driftyco/ionic-bower"
+}

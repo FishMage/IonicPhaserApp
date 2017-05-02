@@ -1,0 +1,41 @@
+.signatureView{
+	
+	.bar-subheader{
+		border: none;
+	}
+	
+	.card{
+		box-shadow: 0 10px 20px rgba(0,0,0,0.1), 0 6px 6px rgba(0,0,0,0.2);
+		height: 100%;
+    margin: 0;
+		
+		.item{
+			background: radial-gradient(circle at 50% 50%, #ffffff 0%, #444a4a 60%);
+			border-radius:4px;
+		}
+	}
+	
+	.list{
+		padding-left: 10px;
+	}
+	
+	.item-content{
+		padding: 0;
+	}
+	
+	.item.group{		
+		@for $i from 1 through 15{
+			&:nth-child(#{$i}){
+				animation-duration: #{$i * 0.25}s;
+			}
+		}
+	}
+	
+	ion-pull-up-content{
+		margin-top: 0 !important;
+		
+		ion-content{
+			top: 0px !important;
+		}
+	}
+}

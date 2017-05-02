@@ -1,0 +1,54 @@
+.menu {
+    
+    ion-header-bar{
+        border: none;
+        box-shadow: none;
+        min-height: 150px;
+        color: #fff;
+        padding: 0;
+    }
+    
+    ion-content {
+        top: 150px !important;
+        background: linear-gradient(10deg, #313131, #1c1c1c, #d61c1c);
+        background-size: 800% 800%;
+        animation: background 26s ease infinite;
+    }
+    
+    .item.animated{
+        animation-name: fadeOut;
+        background: 0 0;
+        border: none;
+        color: rgba(250,250,250,.7);
+        
+        .item-content{
+            background-color: transparent;
+        
+            &.activated{
+                border-color: transparent;
+                background-color: transparent;
+                color: #FFF;
+            }
+        }
+    }
+    
+    .active{
+        color: white !important;
+    }
+}
+
+.menu-open .menu {
+    ion-header-bar img{
+        animation-name: pulse;
+    }
+    
+    .item.animated{
+        animation-name: lightSpeedIn;
+        
+        @for $i from 1 through 10{
+            &:nth-child(#{$i}){
+                animation-duration: #{$i * 0.7}s;
+            }
+        }
+    }
+}

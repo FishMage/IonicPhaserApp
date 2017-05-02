@@ -1,0 +1,10 @@
+{
+  "name": "IonPhaser 1.x",
+  "app_id": "fed7b239",
+  "gulpStartupTasks": [
+    "watch"
+  ],
+  "watchPatterns": [
+    "app/**/*"
+  ]
+}

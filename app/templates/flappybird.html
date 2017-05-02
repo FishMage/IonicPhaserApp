@@ -1,0 +1,9 @@
+<ion-view view-title="Flappy Bird">
+    <ion-floating-button ng-if="isDebugging" click="toggleDebug()" has-footer="false" button-color="#387EF5" icon="ion-bug" icon-color="#FFF">
+    </ion-floating-button>
+    <ion-floating-button ng-if="!isDebugging" click="toggleDebug()" has-footer="false" button-color="#387EF5" icon="ion-bug" icon-color="#000">
+    </ion-floating-button>
+    <ion-content scroll="false" disable-side-menu disable-touch-move>
+        <ion-phaser game="flappybird" style="height: 100%;"></ion-phaser>
+    </ion-content>
+</ion-view>

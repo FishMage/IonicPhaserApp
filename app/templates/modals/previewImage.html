@@ -1,0 +1,10 @@
+<ion-modal-view class="ion-nifty-modal previewImageModal">
+	<div class="ion-modal-content-custom">
+		<ion-header-bar class="bar-dark">
+			<button class="button button-icon ion-close" ng-click="closeModal()"></button>
+		</ion-header-bar>
+		<ion-content class="padding" scroll="false" align="center">
+			<img ng-src="{{::previewImage}}" alt="Preview Image" style="height: 100%;" />
+		</ion-content>
+	</div>
+</ion-modal-view>

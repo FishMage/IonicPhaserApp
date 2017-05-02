@@ -1,0 +1,14 @@
+.galleryView{
+	.item-content{
+		padding: 0;
+	}
+	
+	@for $i from 1 through 10{
+		.animated:nth-child(#{$i}){
+			animation-delay: #{$i * 0.25}s;
+		}
+	}
+    .noDelay{
+        animation-delay: 0 !important;
+    }
+}

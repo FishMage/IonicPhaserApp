@@ -1,0 +1,62 @@
+<ion-side-menus enable-menu-with-back-views="false">
+	<ion-side-menu-content>
+		<ion-nav-bar class="bar-assertive">
+			<ion-nav-back-button>
+			</ion-nav-back-button>
+			<ion-nav-buttons side="left">
+				<button class="button button-icon button-clear ion-navicon" menu-toggle="left">
+				</button>
+			</ion-nav-buttons>
+			<ion-nav-buttons side="right">
+				<button class="button button-icon button-clear ion-android-more-vertical" ng-click="popover.show($event)">
+				</button>
+			</ion-nav-buttons>
+		</ion-nav-bar>
+		<ion-nav-view name="viewContent" animation="slide-left-right"></ion-nav-view>
+	</ion-side-menu-content>
+	<ion-side-menu side="left" class="menu">
+		<ion-header-bar class="item-image">
+            <img src="img/menu_bg.jpg" alt="Ion Phaser" class="animated">
+		</ion-header-bar>
+		<ion-content class="has-header">
+			<ion-list>
+				<ion-item menu-close nav-direction="enter" ui-sref="app.dragon" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-flash"></i>
+					Dragon
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+				<ion-item menu-close nav-direction="enter" ui-sref="app.signature" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-edit"></i>
+					Signature
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+				<ion-item menu-close nav-direction="enter" ui-sref="app.starwars" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-star"></i>
+					Star Wars
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+				<ion-item menu-close nav-direction="enter" ui-sref="app.photo" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-camera"></i>
+					Photo
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+                <ion-item menu-close nav-direction="enter" ui-sref="app.tinder" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-images"></i>
+					Tinder cards
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+                <ion-item menu-close nav-direction="enter" ui-sref="app.flappybird" class="animated item item-icon-left item-icon-right" ui-sref-active="active">
+                    <i class="icon ion-bug"></i>
+					Flappy Bird
+                    <i class="icon ion-chevron-right"></i>
+				</ion-item>
+			</ion-list>
+		</ion-content>
+		<ion-footer-bar class="bar-light">
+			<div class="button-bar">
+				<button class="button button-icon icon ion-home" nav-clear menu-close nav-direction="exit" ui-sref="home">Home</button>
+                <button class="button button-icon icon ion-log-out" on-tap="exitApp()">Exit</button>
+			</div>
+		</ion-footer-bar>
+	</ion-side-menu>
+</ion-side-menus>
