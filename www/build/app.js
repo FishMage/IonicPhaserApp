@@ -1636,7 +1636,7 @@ window.queries = [
             preload: function(){
                 this.game.load.image('tube', 'assets/tube.png');
                 this.game.load.image('ground', 'assets/ground.png');
-                this.game.load.spritesheet('bird', 'assets/bird.png', 75, 55);
+                this.game.load.spritesheet('bird', 'assets/bird.png', 128, 100);
 
                 this.game.load.audio('hit', ['audio/hit.ogg']);
                 this.game.load.audio('die', ['audio/die.ogg']);
@@ -1757,7 +1757,7 @@ window.queries = [
                 if(!this.dead && this.canJump) {
                     this.bird.animations.play('fly');
                     this.birdInJump = true;
-                    this.bird.body.velocity.y = -550;
+                    this.bird.body.velocity.y = -650;
                     this.wingAudio.play();
                 }
 
@@ -1834,7 +1834,7 @@ window.queries = [
                 var tube = this.game.cache.getFrame('tube');
 
                 var tube1 = this.tubes.getFirstDead();
-                tube1.reset(this.game.width + tube.width/2, randomPosition - 100);
+                tube1.reset(this.game.width + tube.width/2, randomPosition - 150);
                 tube1.anchor.setTo(0.5, 1);
                 tube1.scale.set(1.4);
                 tube1.body.velocity.x = -180;
@@ -1843,7 +1843,7 @@ window.queries = [
                 tube1.outOfBoundsKill = true;
 
                 var tube2 = this.tubes.getFirstDead();
-                tube2.reset(this.game.width + tube.width/2, randomPosition + 100 + tube.height/2);
+                tube2.reset(this.game.width + tube.width/2, randomPosition + 150 + tube.height/2);
                 tube2.anchor.setTo(0.5, 0.5);
                 tube2.scale.setTo(-1.4, -1.4);
                 tube2.body.velocity.x = -180;
