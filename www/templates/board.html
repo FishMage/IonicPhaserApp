@@ -1,0 +1,52 @@
+<style type="text/css">
+    *{
+        text-align: center;
+        /*font-family: "Courier"*/
+    }
+
+    /*body {*/
+        /*padding: 20px 40px;*/
+        /*font-family: "Verdana";*/
+    /*}*/
+
+    h1 {
+        margin: 20px;
+    }
+    p{
+        font-size: 200% ;
+        font-family :Copperplate;
+        color: #F44336;
+    }
+    .t3cell {
+        width: 40px;
+        height: 40px;
+        min-width: 40px;
+        min-height: 40px;
+    }
+</style>
+<ion-view view-title="Tic-Tac-Toe!">
+    <!--<link rel="stylesheet" style="text/css" href="css/style.css">-->
+    <!--<ion-content>-->
+    <ion-content class="padding">
+        <div >
+            <div class="container">
+                <div class="well">
+                    <br><br>
+                    <div><button ion-button class="button button-assertive" style="height:100px; width:100px; margin-top:20px; margin-left:20px; font-size: 500%" ng-repeat="cell in board[0]" ng-disabled="isTaken(cell);" ng-click="move(cell);">{{ cell.value }}</button></div>
+                    <div><button ion-button class="button button-assertive" style="height:100px; width:100px; margin-top:20px; margin-left:20px; font-size: 500%"ng-repeat="cell in board[1]" ng-disabled="isTaken(cell);" ng-click="move(cell);">{{ cell.value }}</button></div>
+                    <div><button ion-button class="button button-assertive" style="height:100px; width:100px; margin-top:20px; margin-left:20px; font-size: 500%" ng-repeat="cell in board[2]" ng-disabled="isTaken(cell);" ng-click="move(cell);">{{ cell.value }}</button></div>
+                    <br/><br>
+                    <p>
+                        <span ng-hide="winner || cat">Current Player: {{ currentPlayer }}</span>
+                        <span ng-show="winner">Yay Player {{ currentPlayer }} won!</span>
+                        <span ng-show="cat">Cat!</span>
+                    </p>
+                </div>
+            </div>
+
+            <button ion-button class="button button-secondary"style="font-size: 200%; font-family: 'Courier New'" ng-click="reset();" class="btn btn-primary btn-large">New Game</button>
+    <p style="font-size: 800%" ng-bind="status" />
+    </ion-content>
+</div>
+<!--</ion-content>>-->
+</ion-view>

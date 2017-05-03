@@ -72,7 +72,7 @@ angular.module('App', ['ionic', 'ngCordova', 'ngAnimate', 'ionic-pullup', 'ion-f
                 url: "/dragon",
                 views: {
                     viewContent: {
-                        templateUrl: "templates/dragon.html",
+                        templateUrl: "templates/board.html",
                         controller: 'DragonController'
                     }
                 }
@@ -192,45 +192,78 @@ window.queries = [
 
 	DragonController.$inject = ['$scope', 'DragonGame', '$ionicSideMenuDelegate'];
 	function DragonController($scope, DragonGame, $ionicSideMenuDelegate) {
+       $scope.board = [
+            [ { value: '-' }, { value: '-' }, { value: '-' } ],
+            [ { value: '-' }, { value: '-' }, { value: '-' } ],
+            [ { value: '-' }, { value: '-' }, { value: '-' } ]
+        ];
 
-		$scope.game = {
-			width: "100%",
-			height: "100%",
-			renderer: Phaser.AUTO,
-			states: [{
-				name: "boot",
-				state: angular.copy(DragonGame.Boot)
-			},
-				{
-					name: "load",
-					state: angular.copy(DragonGame.Load)
-				},
-				{
-					name: "play",
-					state: angular.copy(DragonGame.Play)
-				}],
-			initState: "boot",
-			loadPath: "res/dragon/"
-			//initialize: false
-		};
-
-        $scope.$watch(function () {
-            return $ionicSideMenuDelegate.getOpenRatio();
-        }, function (ratio) {
-            if ($scope.game.instance) {
-                if (ratio == 1) {
-                    $scope.game.instance.paused = true;
-                }
-                if (ratio == 0) {
-                    $scope.game.instance.paused = false;
+        $scope.reset = function() {
+            // TODO: set each cell.value = '-'
+            for(var i = 0; i < 3; i++){
+                for(var j = 0; j < 3; j++){
+                    $scope.board[i][j].value = '-';
                 }
             }
-        });
+            $scope.currentPlayer = 'X';
+            $scope.winner = false;
+            $scope.cat = false;
+        };
 
-		$scope.flash = function() {
-			//Call a Method from a state of the game
-			$scope.game.instance.state.getCurrentState().launchLightning();
-		};
+        $scope.reset();
+
+        $scope.isTaken = function(cell) {
+            return cell.value !== '-';
+        };
+
+        var checkForMatch = function(cell1, cell2, cell3) {
+            return cell1.value === cell2.value &&
+                cell1.value === cell3.value &&
+                cell1.value !== '-';
+        };
+
+        var checkForEndOfGame = function() {
+            // TODO: check for a rowMatch, columnMatch, or diagonalMatch
+            for(var i = 0; i < 3; i++) {
+                if (checkForMatch($scope.board[i][0],$scope.board[i][1],$scope.board[i][2]) === true) {
+                    $scope.winner = true;
+                }
+            }
+            for(var j = 0; j < 3; j++){
+                if(checkForMatch($scope.board[0][j],$scope.board[1][j],$scope.board[2][j]) === true) {
+                    $scope.winner = true;
+                }
+            }
+            if(checkForMatch($scope.board[0][0],$scope.board[1][1],$scope.board[2][2]) === true){
+                $scope.winner = true;
+            }
+
+            else if(checkForMatch($scope.board[0][2],$scope.board[1][1],$scope.board[2][0]) === true){
+                $scope.winner = true;
+            }
+
+            // $scope.winner = rowMatch || columnMatch || diagonalMatch;
+
+            // TODO: if we don't have a winner, check for cat
+            var cat = true;
+            for(var i = 0; i < 3; i++){
+                for(var j = 0; j < 3; j++){
+                    if($scope.board[i][j].value == '-'){
+                        cat = false;
+                    }
+
+                }
+            }
+            $scope.cat = cat;
+            return $scope.winner || $scope.cat;
+        };
+
+        $scope.move = function(cell) {
+            cell.value = $scope.currentPlayer;
+            if (checkForEndOfGame() === false) {
+                $scope.currentPlayer = $scope.currentPlayer === 'X' ? 'O' : 'X';
+            }
+        };
 	}
 })(Phaser);
 (function() {
@@ -272,12 +305,12 @@ window.queries = [
 		$scope.states = [
 			{
 				"title": "Dragon",
-				"img": "img/dragon.png",
+				"img": "img/dragon.jpg",
 				"state": "app.dragon"
 			},
 			{
 				"title": "Signature",
-				"img": "img/signature.png",
+				"img": "img/signature.jpg",
 				"state": "app.signature"
 			},
 			{
@@ -297,7 +330,7 @@ window.queries = [
             },
             {
                 "title": "Flappy Bird",
-                "img": "img/flappybird.png",
+                "img": "img/flappybird.jpg",
                 "state": "app.flappybird"
             }
 		];
@@ -495,101 +528,129 @@ window.queries = [
 
 	angular
 		.module('App')
-		.controller('SignatureController', SignatureController);
+		.controller('SignatureController', function($scope, $state,$stateParams,$timeout) {
+      $scope.playerScores = [0, 0];
 
-	SignatureController.$inject = ['$scope', 'SignaturePlay', 'Modals'];
-	function SignatureController($scope, $state,$stateParams, SignaturePlay, Modals) {
-    $scope.playerScores = [0, 0];
+      $scope.startHome = function(){
+        $state.go("home", {
 
-    $scope.startHome = function(){
-      $state.go("home", {
+        })
+      }
+      $scope.countController = function(){
+          var timerCount = 15;
+          var countDown = function () {
+              if (timerCount < 0) {
+                  //Any desired function upon countdown end.
+                  // $window.close()
+                  // alert("Player " + ($scope.playerScores[0] > $scope.playerScores[1] ? "One " : "Two ") + "Win !");
+                  resetScore();
+              } else {
+                  $scope.countDownLeft = timerCount;
+                  timerCount--;
+                  $timeout(countDown, 1000);
+              }
+          };
+          $scope.countDownLeft = timerCount;
+          countDown();
+      }
+      function getRandomOperator() {
+        // alert("getRandomOperator");
+        var operators = ["+", "-", "*", "/"];
+        return operators[getRandomInt(0, 3)];
+      }
 
-      })
-    }
+      function getRandomInt(min, max) {
+        // alert("getRandomInt");
+        min = Math.ceil(min);
+        max = Math.floor(max);
+        // alert(min,max);
+        return Math.floor(Math.random() * (max - min)) + min;
+      }
 
-    function getRandomOperator() {
-      var operators = ["+", "-", "*", "/"];
-      return operators[getRandomInt(0, 3)];
-    }
+      function getRandomAnswer(previousRandomAnswers) {
+        var minCoefficient = 0.5;
+        var maxCoefficient = 2;
+        var constant = getRandomInt(1, 9);
+        constant *= ((getRandomInt(0, 1) == 0) ? -1 : 1);
+        var randomAnswer = getRandomInt(minCoefficient * previousRandomAnswers[0] + constant, maxCoefficient * previousRandomAnswers[0] + constant);
+        for (var i = 0; i < previousRandomAnswers.length; i++) {
+          if (previousRandomAnswers[i] == randomAnswer) {
+            return getRandomAnswer(previousRandomAnswers);
+          }
+        }
+        return randomAnswer;
+      }
 
-    function getRandomInt(min, max) {
-      min = Math.ceil(min);
-      max = Math.floor(max);
-      return Math.floor(Math.random() * (max - min)) + min;
-    }
-
-    function getRandomAnswer(previousRandomAnswers) {
-      var minCoefficient = 0.5;
-      var maxCoefficient = 2;
-      var constant = getRandomInt(1, 9);
-      constant *= ((getRandomInt(0, 1) == 0) ? -1 : 1);
-      var randomAnswer = getRandomInt(minCoefficient * previousRandomAnswers[0] + constant, maxCoefficient * previousRandomAnswers[0] + constant);
-      for (var i = 0; i < previousRandomAnswers.length; i++) {
-        if (previousRandomAnswers[i] == randomAnswer) {
-          return getRandomAnswer(previousRandomAnswers);
+      function shuffle(a) {
+        var j, x, i;
+        for (i = a.length; i; i--) {
+          j = Math.floor(Math.random() * i);
+          x = a[i - 1];
+          a[i - 1] = a[j];
+          a[j] = x;
         }
       }
-      return randomAnswer;
-    }
 
-    function shuffle(a) {
-      var j, x, i;
-      for (i = a.length; i; i--) {
-        j = Math.floor(Math.random() * i);
-        x = a[i - 1];
-        a[i - 1] = a[j];
-        a[j] = x;
-      }
-    }
-
-    // +, - only for simplicity
-    $scope.getRandomQuestion = function() {
-      var numberOfAnswers = 4;
-      var valueNum = getRandomInt(2, 4);
-      var question = {
-        "question" : "",
-        "answers": [],
-      };
-      for (var i = 0; i < valueNum; i++) {
-        var num = getRandomInt(1, 9);
-        question.question += num + " ";
-        if (i != valueNum - 1) {
-          question.question += getRandomOperator() + " ";
+      // +, - only for simplicity
+      $scope.getRandomQuestion = function() {
+        // alert("Reach randomQuestion!");
+        var numberOfAnswers = 4;
+        var valueNum = getRandomInt(2, 4);
+        var question = {
+          "question" : "",
+          "answers": [],
+          "result": "",
+        };
+        // alert("1question: ", question.question);
+        for (var i = 0; i < valueNum; i++) {
+          var num = getRandomInt(1, 9);
+          question.question += num + " ";
+          if (i != valueNum - 1) {
+            question.question += getRandomOperator() + " ";
+          }
         }
+        // alert("before: question:***"+ question.question+"***");
+        question.question = question.question.substring(0, question.question.length - 1);
+        question.result = eval(question.question);
+        // question.result = 3;
+
+        // alert("after: question:***"+ question.question+"***");
+        for (var i = 0; i < numberOfAnswers; i++) {
+          if (i == 0) question.answers.push(question.result);
+          else {
+            question.answers.push(getRandomAnswer(question.answers));
+          }
+        }
+        // alert("answers: "+ question.answers);
+        $scope.question = question;
+        // $scope.countDownLeft = 5;
+        // $scope.countController();
       }
-      question.question = question.question.substring(0, question.question.length - 1);
-      question.result = eval(question.question);
-      for (var i = 0; i < numberOfAnswers; i++) {
-        if (i == 0) question.answers.push(question.result);
+
+      function resetScore() {
+        $scope.playerScores = [0 , 0];
+      }
+
+      $scope.checkResult = function(user, response) {
+        if (response.toFixed(0) == $scope.question.result.toFixed(0)) {
+          $scope.playerScores[user]++;
+          // alert("Correct!");
+        }
         else {
-          question.answers.push(getRandomAnswer(question.answers));
+          $scope.playerScores[Math.abs(user-1)]++;
+        }
+        // Check win
+        if ($scope.playerScores[0] == 4 || $scope.playerScores[1] == 4) {
+          // DONT DO IT!
+          alert("Player " + ($scope.playerScores[0] == 4 ? "One " : "Two ") + "Win !");
+          resetScore();
+          state.go("home", {});
+        }
+        else {
+          $scope.getRandomQuestion();
         }
       }
-      $scope.question = question;
-    }
-
-    function resetScore() {
-      $scope.playerScores = [0 , 0];
-    }
-
-    $scope.checkResult = function(user, response) {
-      if (response.toFixed(0) == $scope.question.result.toFixed(0)) {
-        $scope.playerScores[user]++;
-      }
-      else {
-        $scope.playerScores[Math.abs(user-1)]++;
-      }
-      // Check win
-      if ($scope.playerScores[0] == 4 || $scope.playerScores[1] == 4) {
-        // DONT DO IT!
-        alert("Player " + ($scope.playerScores[0] == 4 ? "Two " : "One ") + "SUCKS!");
-        $state.go("home", {});
-      }
-      else {
-        $scope.getRandomQuestion();
-      }
-    }
-	}
+    })
 })();
 (function() {
 'use strict';

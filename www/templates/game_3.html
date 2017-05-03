@@ -17,15 +17,25 @@
       margin: 10px;
     }
     body {
-        width: 100%; height: 100%; margin: 0px; padding: 0px;
+        width: 100%; height: 200%; margin: 0px; padding: 0px;
     }
     .quizContainer {
       position: relative;
       width: 100%;
       height: 100%;
     }
+    /*.button ion-button{*/
+      /*color: #0a9dc7;*/
+    /*}*/
     .score {
-      color: red; text-align: center; font-size: 4em;
+      color: #f4483c; text-align: center; font-size: 3em;
+    }
+    .timer{
+      color: #50b2f4; text-align: center; font-size: 1em;
+    }
+    .button button-assertive{
+      margin-top:10px;
+      margin-left:10px;
     }
   </style>
 </head>
@@ -36,7 +46,7 @@
 <ion-view view-title="Welcome to My Quiz" ng-init="getRandomQuestion();">
   <!--<ion-nav-bar class="bar-positive">-->
   <ion-header-bar class="bar-stable">
-    <h1 class="title">Math Quiz</h1> <!-- The title bar has a title of "GuestBook" and uses an "h1" HTML tag -->
+    <h1 class="title">Math Quiz Game!</h1> <!-- The title bar has a title of "GuestBook" and uses an "h1" HTML tag -->
   </ion-header-bar>
   <br><br>
   <ion-nav-view></ion-nav-view>
@@ -44,24 +54,34 @@
   </ion-content>
 
   <div class="quizContainer">
+    <br>
   <div class="flip">
+    <br>
+    <h1 class = "timer" style="text-align: center" ng-app ng-controller = "countController"> Time Left:  {{countDownLeft}} <h1>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
     <h1 class="score">Player One: {{playerScores[0]}}</h1>
     <h2 style="text-align: center;">{{question.question}}</h2>
     <div>
-      <button ng-repeat="answer in question.answers track by $index" ng-click="checkResult(0, answer)">{{answer}}</button>
+      <button ion-button class="button button-assertive" style="height:40px; width:40px; margin-top:10px; margin-left:20px;"
+              ng-repeat="answer in question.answers track by $index" ng-click="checkResult(0, answer)">{{answer}}</button>
     </div>
   </div>
 
-  <hr style="position: fixed; top: 50%; left: 0; width: 100%;">
+  <hr style="position: fixed; top: 50%; left: 0; width: 200%;">
 
   <div style="position: fixed; bottom: 0; width: 100%;">
+      <br><br><br>
+    <h1 class = "timer" style="text-align: center" ng-app ng-controller = "countController"> Time Left:  {{countDownLeft}} <h1>​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​​
+    <!--<span id="timer"></span>-->
     <h1 class="score">Player Two: {{playerScores[1]}}</h1>
-    <h2 style="text-align: center;">{{question.question}}</h2>
+    <h3 style="text-align: center;">{{question.question}}</h3>
     <div>
-      <button ng-repeat="answer in question.answers track by $index" ng-click="checkResult(1, answer)">{{answer}}</button>
+      <br>
+      <button ion-button class="button button-assertive" style="height:40px; width:40px; margin-bottom:10px; margin-left:20px;"
+              ng-repeat="answer in question.answers track by $index" ng-click="checkResult(0, answer)">{{answer}}</button>
+      <br><br>
     </div>
-  </div>
-  </div>
+  </h1>
+  </h1>
 </ion-view>
-<!--</body>-->
-<!--</html>-->
+</body>
+</html>
