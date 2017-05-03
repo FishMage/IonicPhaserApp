@@ -1615,12 +1615,21 @@ window.queries = [
 
     FlappyBirdPlay.$inject = ['$cordovaVibration', '$timeout'];
     function FlappyBirdPlay($cordovaVibration, $timeout) {
-
+      var randomNum = Math.floor(Math.random() * 3) + 1;
         var $scope = null;
 
         var state = {
             init: function() {
-				this.stage.backgroundColor = "#41C9D6";
+				if(randomNum == 1){
+				this.stage.backgroundColor = "#8585ad";
+				}
+				else if(randomNum == 2){
+				this.stage.backgroundColor = "#99ffdd";
+				}
+				else {
+                this.stage.backgroundColor = "#cce6ff";
+				}
+
 				this.input.maxPointers = 1;
 				this.stage.disableVisibilityChange = true;
 				this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
@@ -1634,9 +1643,26 @@ window.queries = [
                 this.game.time.desiredFps = 60;
 			},
             preload: function(){
-                this.game.load.image('tube', 'assets/tube.png');
-                this.game.load.image('ground', 'assets/ground.png');
-                this.game.load.spritesheet('bird', 'assets/bird.png', 128, 100);
+                //var randomNum = Math.floor(Math.random() * 2) + 1
+
+                if (randomNum == 1){
+                    this.game.load.image('tube', 'assets/firepillar.png');
+                    this.game.load.image('ground', 'assets/lava.png');
+                    this.game.load.spritesheet('bird', 'assets/doraemon.png', 100, 100);
+                }
+                else if(randomNum == 2){
+                    this.game.load.image('tube', 'assets/tree.png');
+                      this.game.load.image('ground', 'assets/wave.png');
+                     this.game.load.spritesheet('bird', 'assets/chopper.png', 100, 100);
+                }
+                else {
+                    this.game.load.image('tube', 'assets/building.png');
+                    this.game.load.image('ground', 'assets/ground.png');
+                    this.game.load.spritesheet('bird', 'assets/superman.png', 100, 100);
+                }
+
+
+
 
                 this.game.load.audio('hit', ['audio/hit.ogg']);
                 this.game.load.audio('die', ['audio/die.ogg']);
@@ -1755,9 +1781,12 @@ window.queries = [
                 }
 
                 if(!this.dead && this.canJump) {
+
+                    var tempV = Math.floor(Math.random() * 300) + 1
+                    var realV = 500+tempV
                     this.bird.animations.play('fly');
                     this.birdInJump = true;
-                    this.bird.body.velocity.y = -650;
+                    this.bird.body.velocity.y = -realV;
                     this.wingAudio.play();
                 }
 
@@ -1834,7 +1863,7 @@ window.queries = [
                 var tube = this.game.cache.getFrame('tube');
 
                 var tube1 = this.tubes.getFirstDead();
-                tube1.reset(this.game.width + tube.width/2, randomPosition - 150);
+                tube1.reset(this.game.width + tube.width/2, randomPosition - 180);
                 tube1.anchor.setTo(0.5, 1);
                 tube1.scale.set(1.4);
                 tube1.body.velocity.x = -180;
