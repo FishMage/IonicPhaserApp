@@ -1,1 +1,21 @@
-<ion-view class="tinderView" view-title="Tinder cards"><ion-content scroll="false" disable-side-menu disable-touch-move><ion-phaser game="tinder" style="height: 100%"></ion-phaser></ion-content><td-cards class="animated fadeIn" ng-if="cards.length > 0"><td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)"><div class="image"><div class="no-text"><i class="icon ion-thumbsdown"></i></div><div class="yes-text"><i class="icon ion-thumbsup"></i></div><img ng-src="{{ card.image }}"></div></td-card></td-cards></ion-view>
+<ion-view class="tinderView" view-title="Guessing Game">
+    <ion-content scroll="false" disable-side-menu disable-touch-move>
+        <ion-phaser game="tinder" style="height: 100%"></ion-phaser>
+    </ion-content>
+    <br><br>
+    <h2 style="font-size: 140%; color: #F44336; font-family: Copperplate ;margin-left: 15px; margin-right: 15px; text-align: center">Describe those famous figure and let your friend guess!</h2>
+    <h2 style="font-size: 140%; color: #1af43a; font-family: Copperplate ;margin-left: 10px; margin-right: 10px; text-align: right">if correct, swipe right -></h2>
+    <h2 style="font-size: 140%; color: #f40200; font-family: Copperplate ;margin-left: 10px; margin-right: 10px"><- if wrong, swipe left</h2>
+    <br>
+    <br>
+    <br>
+    <td-cards class="animated In" ng-if="cards.length > 0"><td-card ng-repeat="card in cards" on-destroy="cardDestroyed($index)" on-swipe-left="cardSwipedLeft($index)" on-swipe-right="cardSwipedRight($index)">
+        <div class="image"><div class="no-text">
+            <i class="icon ion-thumbsdown"></i>
+        </div>
+            <div class="yes-text"><i class="icon ion-thumbsup"></i></div>
+            <img ng-src="{{ card.image }}">
+        </div>
+    </td-card>
+    </td-cards>
+</ion-view>

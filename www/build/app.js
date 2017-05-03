@@ -310,22 +310,12 @@ window.queries = [
 			},
 			{
 				"title": "Signature",
-				"img": "img/signature.jpg",
+				"img": "img/signature.png",
 				"state": "app.signature"
-			},
-			{
-				"title": "Star Wars",
-				"img": "img/starwars.png",
-				"state": "app.starwars"
-			},
-			{
-				"title": "Photo",
-				"img": "img/photo.png",
-				"state": "app.photo"
 			},
             {
                 "title": "Tinder",
-                "img": "img/tinder.png",
+                "img": "img/tinder.jpg",
                 "state": "app.tinder"
             },
             {
@@ -384,7 +374,7 @@ window.queries = [
             $timeout(function () {
                 //Animate again
                 $logo.addClass("tada");
-            }, 50);
+            }, 100);
         };
 	}
 })();
@@ -703,11 +693,13 @@ window.queries = [
         };
 
         var cardsCopy = [
-            { image: 'img/dragon.png' },
-            { image: 'img/signature.png' },
-            { image: 'img/starwars.png' },
-            { image: 'img/photo.png' },
-            { image: 'img/tinder.png' }
+            { image: 'img/ironman.jpg' },
+            { image: 'img/pikachu.png' },
+            { image: 'img/steveJobs.jpg' },
+            { image: 'img/trump.jpg' },
+            { image: 'img/minion.jpg' },
+            { image: 'img/kim.jpg' },
+            { image: 'img/jb.jpg' },
         ];
 
         $scope.fillCards = function(){
@@ -1844,7 +1836,7 @@ window.queries = [
                 if(!this.dead && this.canJump) {
 
                     var tempV = Math.floor(Math.random() * 300) + 1
-                    var realV = 500+tempV
+                    var realV = 400+tempV
                     this.bird.animations.play('fly');
                     this.birdInJump = true;
                     this.bird.body.velocity.y = -realV;
@@ -1878,7 +1870,7 @@ window.queries = [
 
                 if(this.birdInJump){
                     if(this.bird.angle > -30){
-                        this.bird.angle -= 10;
+                        this.bird.angle -= 5;
                     }else{
                         this.birdInJump = false;
                     }
@@ -3058,7 +3050,7 @@ window.queries = [
 
         var state = {
             init: function() {
-				//this.stage.backgroundColor = 0xffffff;
+				// this.stage.backgroundColor = 0x111111;
 				this.input.maxPointers = 1;
 				this.stage.disableVisibilityChange = true;
 				this.scale.scaleMode = Phaser.ScaleManager.RESIZE;
@@ -3068,7 +3060,7 @@ window.queries = [
                 this.scale.updateLayout();
 			},
             preload: function () {
-                this.load.image('ionphaser', 'assets/ionphaser.png');
+                this.load.image('ionphaser', 'assets/logo.png');
                 this.load.image('like', 'assets/like.png');
                 this.load.image('dislike', 'assets/dislike.png');
             },
